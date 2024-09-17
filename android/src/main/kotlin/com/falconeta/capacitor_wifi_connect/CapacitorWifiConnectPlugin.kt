@@ -235,6 +235,23 @@ class CapacitorWifiConnectPlugin : Plugin() {
     }
   }
 
+  @PluginMethod
+  fun connectByWifiNetworkSuggestionAndroid(call: PluginCall) {
+    if (!isPermissionGranted()) {
+      checkPermission(call, "connectByWifiNetworkSuggestionAndroidPermsCallback");
+      return;
+    }
+    val ssid = call.getString("ssid")
+    val password = call.getString("password")
+    val isWep = call.getBoolean("isWep") ?: false;
+    val isWpa3 = call.getBoolean("isWpa3") ?: false;
+    if (ssid != null && password != null) {
+      implementation.connectByWifiNetworkSuggestionAndroid(ssid!!, password!!, call);
+    } else {
+      call.reject("SSID and password are mandatory")
+    }
+  }
+
   @PermissionCallback
   private fun secureConnectPermsCallback(call: PluginCall) {
     if (isPermissionGranted()) {

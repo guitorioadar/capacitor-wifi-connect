@@ -51,6 +51,13 @@ export class CapacitorWifiConnectPluginWeb
     options;
     throw new Error('Method not implemented.');
   }
+  connectByWifiNetworkSuggestionAndroid(options: {
+    ssid: string;
+    password: string;
+  }): Promise<{ value: number }> {
+    options;
+    throw new Error('Method not implemented.');
+  }
   securePrefixConnect(options: {
     ssid: string;
     password: string;

@@ -76,6 +76,18 @@ export interface CapacitorWifiConnectPlugin {
   }): Promise<{ value: ConnectState }>;
 
   /**
+   * method attempts to connect to wifi matching explicitly the ssid parameter
+   * using latest the wifi network suggestion api by google.
+   * Only Android >= 10
+   * @param options {ssid: string, password: string}
+   * @since 1.0.0
+   */
+  connectByWifiNetworkSuggestionAndroid(options: {
+    ssid: string;
+    password: string;
+  }): Promise<{ value: ConnectState }>;
+
+  /**
    * method attempts to connect to the nearest
    * wifi network with the ssid prefix matching the ssidPrefix parameter.
    * This will fail if the password doesn't match or the isWep parameter

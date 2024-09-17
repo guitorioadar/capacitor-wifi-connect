@@ -1,5 +1,6 @@
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Camera } from '@capacitor/camera';
+import { CapacitorWifiConnect } from "@falconeta/capacitor-wifi-connect";
 
 window.customElements.define(
   'capacitor-welcome',
@@ -79,7 +80,7 @@ window.customElements.define(
           This demo shows how to call Capacitor plugins. Say cheese!
         </p>
         <p>
-          <button class="button" id="take-photo">Take Photo</button>
+          <button class="button" id="take-photo">Connect to Wifi</button>
         </p>
         <p>
           <img id="image" style="max-width: 100%">
@@ -93,20 +94,37 @@ window.customElements.define(
       const self = this;
 
       self.shadowRoot.querySelector('#take-photo').addEventListener('click', async function (e) {
-        try {
-          const photo = await Camera.getPhoto({
-            resultType: 'uri',
-          });
-
-          const image = self.shadowRoot.querySelector('#image');
-          if (!image) {
-            return;
-          }
-
-          image.src = photo.webPath;
-        } catch (e) {
-          console.warn('User cancelled', e);
+        let { value } = await CapacitorWifiConnect.checkPermission();
+        if (value === 'prompt') {
+          const data = await CapacitorWifiConnect.requestPermission();
+          value = data.value;
         }
+        console.log('return value')
+        
+        if (value === 'granted') {
+          CapacitorWifiConnect.connectByWifiNetworkSuggestionAndroid({
+            ssid: 'Audra',
+            password: '1234567890',
+          }).then((data) => alert(data.value));
+        } else {
+          throw new Error('permission denied');
+        }
+
+
+        // try {
+        //   const photo = await Camera.getPhoto({
+        //     resultType: 'uri',
+        //   });
+
+        //   const image = self.shadowRoot.querySelector('#image');
+        //   if (!image) {
+        //     return;
+        //   }
+
+        //   image.src = photo.webPath;
+        // } catch (e) {
+        //   console.warn('User cancelled', e);
+        // }
       });
     }
   }

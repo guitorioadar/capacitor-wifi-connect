@@ -70,6 +70,7 @@ For functionality, you need to note the following:
 * [`connect(...)`](#connect)
 * [`prefixConnect(...)`](#prefixconnect)
 * [`secureConnect(...)`](#secureconnect)
+* [`connectByWifiNetworkSuggestionAndroid(...)`](#connectbywifinetworksuggestionandroid)
 * [`securePrefixConnect(...)`](#secureprefixconnect)
 * [Type Aliases](#type-aliases)
 * [Enums](#enums)
@@ -227,6 +228,27 @@ WARNING: saveNetwork is enabled by default on iOS and cannot be disabled due App
 | Param         | Type                                                                                     |
 | ------------- | ---------------------------------------------------------------------------------------- |
 | **`options`** | <code>{ ssid: string; password: string; saveNetwork?: boolean; isWep?: boolean; }</code> |
+
+**Returns:** <code>Promise&lt;{ value: <a href="#connectstate">ConnectState</a>; }&gt;</code>
+
+**Since:** 1.0.0
+
+--------------------
+
+
+### connectByWifiNetworkSuggestionAndroid(...)
+
+```typescript
+connectByWifiNetworkSuggestionAndroid(options: { ssid: string; password: string; }) => Promise<{ value: ConnectState; }>
+```
+
+method attempts to connect to wifi matching explicitly the ssid parameter
+using latest the wifi network suggestion api by google.
+Only Android &gt;= 10
+
+| Param         | Type                                             | Description                 |
+| ------------- | ------------------------------------------------ | --------------------------- |
+| **`options`** | <code>{ ssid: string; password: string; }</code> | : string, password: string} |
 
 **Returns:** <code>Promise&lt;{ value: <a href="#connectstate">ConnectState</a>; }&gt;</code>
 
