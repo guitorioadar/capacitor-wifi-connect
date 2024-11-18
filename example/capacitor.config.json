@@ -7,5 +7,12 @@
     "SplashScreen": {
       "launchShowDuration": 0
     }
+  },
+  "server": {
+    "url": "http://192.168.98.230:8080",
+    "cleartext": true
+  },
+  "ios": {
+    "contentInset": "never"
   }
 }
